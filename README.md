@@ -72,4 +72,16 @@ print(df.head())
 
 print("\n資料摘要：")
 print(df.describe())
+
+X = df.iloc[:, :-1]
+y = df['species']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = LogisticRegression(max_iter=200)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print("\n分類報告：")
+print(classification_report(y_test, y_pred))
+
 ```
