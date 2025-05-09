@@ -130,3 +130,9 @@ print("\n🔹 分類報告：")
 print(classification_report(y_test, y_pred))
 
 ```
+- 分析結果
+  - petal 長度與寬度 是最具鑑別力的特徵，setosa 幾乎完全可依此分離。
+
+  - sepal 特徵 在三個品種中有部分重疊，辨識效果相對較差。
+
+  - versicolor 與 virginica 最易混淆，因特徵範圍較接近。
