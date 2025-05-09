@@ -37,17 +37,10 @@ Iris 資料集由英國統計學家 Ronald Fisher 所提出，是資料科學與
   - Scikit-learn：模型建立與分類評估
 
 - 數據處理與分析步驟 :
-  - 載入資料並轉為 DataFrame，加入品種對應名稱。
-  
-  - 使用 describe() 檢視數據統計摘要。
-  - 分別以：
-   - 箱型圖（Box Plot）：檢視特徵在不同品種下的分布與異常值。
-
-   - 折線圖（Line Plot）：比較三種花卉的平均特徵趨勢。
-
-   - 長條圖（Bar Chart）：呈現各品種四個特徵的平均值。
-
-  - 使用邏輯迴歸進行分類並輸出準確率與分類報告。
+  - 載入資料並轉為 DataFrame，加入品種對應名稱  
+  - 使用 describe() 檢視數據統計摘要
+  - 用圖表將資料視覺化
+  - 使用邏輯迴歸進行分類並輸出準確率與分類報告
 
 ## 程式碼
 
@@ -72,17 +65,6 @@ print(df.head())
 
 print("\n資料摘要：")
 print(df.describe())
-
-X = df.iloc[:, :-1]
-y = df['species']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-model = LogisticRegression(max_iter=200)
-model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
-
-print("\n分類報告：")
-print(classification_report(y_test, y_pred))
 
 ```
 ## 結果與分析
@@ -119,3 +101,32 @@ plt.show()
 
 ```
 
+- 長條圖：展示各特徵在不同品種的平均值
+
+```python
+
+mean_features.T.plot(kind='bar', figsize=(10, 6))
+plt.title('不同品種特徵平均值長條圖')
+plt.ylabel('平均值')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+```
+
+- 建立模型並輸出分類報告
+
+```python
+
+X = df.iloc[:, :-1]
+y = df['species']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = LogisticRegression(max_iter=200)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print("\n🔹 分類報告：")
+print(classification_report(y_test, y_pred))
+
+```
