@@ -86,3 +86,36 @@ print(classification_report(y_test, y_pred))
 
 ```
 ## 結果與分析
+- 箱型圖：顯示不同品種下各特徵的分布
+
+```python
+
+for col in df.columns[:-1]:
+    plt.figure(figsize=(6, 4))
+    sns.boxplot(x='species', y=col, data=df)
+    plt.title(f'{col} 不同品種的分布')
+    plt.tight_layout()
+    plt.show()
+
+```
+
+- 折線圖：每個品種的特徵平均值趨勢
+
+```python
+
+mean_features = df.groupby('species').mean()
+plt.figure(figsize=(8, 5))
+for species in mean_features.index:
+    plt.plot(mean_features.columns, mean_features.loc[species], marker='o', label=species)
+
+plt.title('各品種平均特徵值折線圖')
+plt.xlabel('特徵')
+plt.ylabel('平均值')
+plt.xticks(rotation=45)
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+```
+
